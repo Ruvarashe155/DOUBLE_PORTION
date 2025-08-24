@@ -1,0 +1,118 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block content %}
+<div class="modal-header">
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+  <div class="mdc-card py-2">
+      <div class="d-flex justify-content-between align-items-center">
+            <center><h1 class="card-title mb-0" >Budget</h1></center>
+        </div>
+        </div>
+        </div>
+        </div>
+        <form action="{% url 'records:budget' %}" id="form" method="post" >
+             {% csrf_token %}
+             <input type="hidden" name="id">
+                <div class="row">
+
+
+                     <div class="col-4" hidden="hidden">
+                        
+                        <input type="hidden" name="id" id="id" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                    </div>
+                    
+
+                    <div class="col-4">
+                         <div class="form-group mb-3">
+                        <label >Month</label>
+                        <input type="text" name="month" id="month" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                    </div>
+                    </div>
+                    
+                    
+
+                      <div class="col-4">
+                         <div class="form-group mb-3">
+                        <label >Amount</label>
+                        <input type="text" name="amount" id="amount" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                    </div>
+                      </div>
+                </div>
+                    
+
+
+                    
+
+                  <div class="d-flex justify-content-center button-container form-group mb-3">
+                 <center><button type="submit" class="btn btn-secondary me-2">Save</button></center><br>
+                  <center><button type="reset" class="btn btn-primary">Cancel</button></center>
+                </div>
+                
+                
+      
+            </form>
+
+                   
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card py-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0">Budget List</h4>
+
+            <div class="text-start">
+            
+            </div>
+    
+        </div>
+    </div>
+</div>
+
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="example" border="8">
+                <colgroup>
+                    <col width="20%">
+                    <col width="40%">
+                    <col width="40%">
+                    
+                    
+                </colgroup>
+                <thead>
+                    <tr>
+                        
+                      <th class="text-left py-1">Budget ID</th>
+                        <th class="text-left py-1">Budget For</th>
+                         <th class="text-left py-1">Amount</th>
+                       
+                      
+                       
+                
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for budget in budget_list%}
+
+                  <tr>
+                    
+                    <td class="px-2 py-1 text-center"> <a href="#" onclick="populateBudgetInfo('{{budget.budget_id}}','{{ budget.month }}','{{ budget.amount }}')">
+                                  {{budget.budget_id}}
+                                </a></td>
+                   <td class="px-2 py-1 text-left">{{budget.month}}</td>
+                   <td class="px-2 py-1 text-left">{{budget.amount}}</td>
+                     
+                    </tr>
+                    {%endfor%}
+                    
+                </tbody>
+            </table>  
+        
+            
+    <script>
+    function populateBudgetInfo(id,month,amount){
+    document.getElementById("id").value = id;   
+    document.getElementById("month").value = month;
+    document.getElementById("amount").value = amount;
+
+    }
+</script>
+{%endblock content%}

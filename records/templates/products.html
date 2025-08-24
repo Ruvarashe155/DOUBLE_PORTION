@@ -1,0 +1,109 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block content %}
+        <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+        <div class="mdc-card py-2">
+         <div class="d-flex justify-content-between align-items-center">
+            <h1 class="card-title mb-0 modal-title">Our Products</h1>
+        </div>
+        </div>
+        </div>
+
+
+        <form action="{% url 'records:products' %}" id="form" method="post" >
+             {% csrf_token %}
+              <input type="hidden" name="id">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group mb-3">
+                        <label class="control-label">Product Name</label>
+                        <input type="text" name="product_name" id="product_name" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                    </div>
+                    </div>
+
+                    
+                      <div class="col-4">
+                        <div class="form-group mb-3">
+                        <label class="control-label">Units</label>
+                        <input type="text" name="units" id="units" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                    </div>
+                 </div>
+
+
+
+                    <div class="col-4">
+                    <div class="form-group mb-3">
+                    <label class="control-label">Cost</label>
+                    <input type="number" name="cost" id="cost" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                </div>
+                 </div>
+
+                     <div class="col-4">
+                        <div class="form-group mb-3">
+                        <label class="control-label">Description</label>
+                        <input type="text" name="description" id="description" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                    </div>
+                 </div>
+
+                  <div class="d-flex justify-content-center button-container form-group mb-3">
+                 <center><button type="submit" class="btn btn-secondary me-2">Save</button></center><br>
+                  <center><button type="reset" class="btn btn-primary">Cancel</button></center>
+                </div>
+            </div>
+            
+      
+        </form>
+   
+              
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card py-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0">Product List</h4>
+
+            <div class="text-start">
+            
+            </div>
+    
+        </div>
+    </div>
+</div>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="example" border="8">
+                <colgroup>
+                    <col width="15%">
+                    <col width="20%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="20%">
+                    
+                </colgroup>
+                <thead>
+                    <tr>
+                      <th class="text-left py-1">Product Id</th>
+                        <th class="text-center py-1">Product Name</th>
+                        <th class="text-center py-1">Units</th>
+                        <th class="text-center py-1">Cost ($)</th>
+                        <th class="text-left py-1">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for product in product_list%}
+
+                  <tr>
+                    <td class="px-2 py-1 text-center">{{product.product_id}}</td>
+                   <td class="px-2 py-1 text-left">{{product.product_name}}</td>
+                   <td class="px-2 py-1 text-left">{{product.units}}</td>
+                   <td class="px-2 py-1 text-left">{{product.cost}}</td>
+                    <td class="px-2 py-1 text-left">{{product.description}}</td>   
+                    </tr>
+                    {%endfor%}
+                    
+                </tbody>
+            </table> 
+         </div>
+    </div>
+</div>
+           
+{%endblock content%}

@@ -1,0 +1,55 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card py-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="card-title mb-0">Stock List</h1>
+
+            <div class="text-start">
+            
+            </div>
+    
+        </div>
+    </div>
+</div>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="example" border="8">
+                <colgroup>
+                    <col width="5%">
+                    <col width="20%">
+                    <col width="20%">
+                    
+                    
+                </colgroup>
+                <thead>
+                    <tr>
+                      <th class="text-left py-1">Product </th>
+                        <th class="text-left py-1">Unit </th>
+                        <th class="text-left py-1">Quantity</th>
+                       
+                      
+                       
+                
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for stock in products %}
+                 
+
+                  <tr>
+                    <td class="px-2 py-1 text-center">{{stock.product_name}}</td>
+                   <td class="px-2 py-1 text-left">{{stock.units}}</td>
+                      <td class="px-2 py-1 text-right">{{stock.current_stock}}</td>
+                  
+                    </tr>
+                   
+                    {%endfor%}
+                </tbody>
+            </table>                 
+{%endblock content%}

@@ -1,0 +1,128 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block content %}
+ <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+        <div class="mdc-card py-2">
+         <div class="d-flex justify-content-between align-items-center">
+            <h1 class="card-title mb-0 modal-title">Allocations</h1>
+        </div>
+        </div>
+        </div>
+        <form action="{% url 'records:allocating' %}" id="form" method="post" >
+             {% csrf_token %}
+            
+                <div class="row">
+
+                      <div class="col-4">
+                        <label >Date</label>
+                        <input type="date" name="date" id="date" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                            
+                        </div>
+
+                    <div class="col-4">
+                        <label >Name</label>
+                        <select type="text" name="name" id="name" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                            <option  value="" disabled selected>-select-the-seller</option>
+                            {%for name in name_list%}
+                            <option value="{{name.user_id}}">{{name.full_name}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
+
+
+                     <div class="col-4">
+                        <label >Product</label>
+                        <select type="text" name="product" id="product" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                            <option  value="" disabled selected>-select-product-</option>
+                            {% for product in products%}
+                            <option value="{{product.product_id}}">{{product.product_name}}:{{product.units}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
+                 
+
+
+                 <div class="col-4">
+                        <label >Quantity</label>
+                        <input type="number" name="quantity" id="quantity" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                 </div>
+                            
+                        
+                    
+                 
+
+
+                 <div class="col-4">
+                        <label >Units</label>
+                        <select type="text" name="units" id="units" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                            <option value="" disabled selected>-select units-</option>
+                            {% for product in product_list%}
+                            <option value="{{product.product.units}}">{{product.product.units}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
+                 
+
+                  <div class="d-flex justify-content-center button-container form-group mb-3">
+                 <center><button type="submit" class="btn btn-secondary me-2">Save</button></center><br>
+                  <center><button type="reset" class="btn btn-primary">Cancel</button></center>
+                </div>
+                </div>
+      
+        </form>
+
+                   
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card py-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0">Allocation List</h4>
+
+            <div class="text-start">
+            
+            </div>
+    
+        </div>
+    </div>
+</div>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="example">
+                <colgroup>
+                    <col width="20%">
+                    <col width="40%">
+                    <col width="20%">
+                     <col width="20%">
+                      <col width="20%">
+                    
+                </colgroup>
+                <thead>
+                    <tr>
+                         <th class="text-left py-1">Date</th>
+                      <th class="text-left py-1">Allocated To</th>
+                        <th class="text-center py-1">Product </th>
+                         <th class="text-center py-1">Units </th>
+                        <th class="text-center py-1">Quantity </th>
+                       
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for allo in allocation_list%}
+
+                  <tr>
+                    <td class="px-2 py-1 text-center">{{allo.date}}</td>
+                   <td class="px-2 py-1 text-left">{{allo.user_id.full_name}}</td>
+                    <td class="px-2 py-1 text-left">{{allo.man_id.product.product_id}}:{{allo.man_id.product.product_name}}</td> 
+                     <td class="px-2 py-1 text-center">{{allo.man_id.product.units}}</td>  
+                     <td class="px-2 py-1 text-center">{{allo.quantity}}</td>
+                     
+                    </tr>
+                    {%endfor%}
+                    
+                </tbody>
+            </table>
+            </div>
+            </div>
+            </div>            
+{%endblock content%}

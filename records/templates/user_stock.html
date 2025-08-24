@@ -1,0 +1,67 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block content %}
+{%load humanize%}
+
+
+
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card py-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <center><h1 class="card-title mb-0 text-center">Seller Stock Report</h1></center>
+
+            <div class="text-start">
+            
+            </div>
+    
+        </div>
+    </div>
+</div>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="example" border="5">
+                <colgroup>
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                     <col width="5%">
+                    <col width="20%">
+                    <col width="20%">
+                    
+                    
+                </colgroup>
+                <thead>
+                    <tr>
+                       
+                       
+                      <th class="text-left py-1">User</th>
+                        <th class="text-left py-1">Product </th>
+                         <th class="text-left py-1">Units</th>
+                        <th class="text-left py-1">Allocated</th>
+                        <th class="text-left py-1">Sold</th>
+                        <th class="text-left py-1">Remaining</th>
+                        
+                      
+                       
+                
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for stock in report %}
+                 
+
+                  <tr>
+                    <td class="px-2 py-1 text-left">{{stock.user}}</td>
+                   <td class="px-2 py-1 text-left">{{stock.product}}</td>
+                    <td class="px-2 py-1 text-left">{{stock.units}}</td>
+                      <td class="px-2 py-1 text-right" style="text-align: right;">{{stock.allocated|intcomma}}</td>
+                       <td class="px-2 py-1 text-right" style="text-align: right;">{{stock.sold}}</td>
+                        <td class="text-ri" style="text-align: right;">{{stock.remaining}}</td>
+                  
+                    </tr>
+                   
+                    {%endfor%}
+                </tbody>
+            </table>                 
+{%endblock content%}

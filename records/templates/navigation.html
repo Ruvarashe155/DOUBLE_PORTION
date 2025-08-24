@@ -1,0 +1,258 @@
+
+<aside class="mdc-drawer mdc-drawer--dismissible mdc-drawer--open bg-dark bg-gradient">
+    <div class="mdc-drawer__header border-bottom border-light">
+        <a href="" class="brand-logo">
+            <h3 class="text-center text-light">Double Portion</h3>
+        </a>
+    </div>
+    <div class="mdc-drawer__content">
+        <div class="mdc-list-group">
+        <nav class="mdc-list mdc-drawer-menu">
+            <div class="mdc-list-item mdc-drawer-item">
+                <a class="mdc-drawer-link" href="">
+                    <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="false">home</i> Dashboard
+                </a>
+            </div>
+       
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">settings</i>
+                                 <div class="text-light">System Configuration</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+    
+                                <li class="mdc-list-item" role="menuitem" title="Attendance Register">
+                                    <a href="">School Details</a>
+                                </li>
+                                <li class="mdc-list-item" role="menuitem" title="Attendance summary">
+                                    <a href="">Session</a>
+                                </li>
+                                <li class="mdc-list-item" role="menuitem" title="Temporary Pass">
+                                    <a href="">Ordinance</a>
+                                </li>
+                                <li class="mdc-list-item" role="menuitem" title="Attendance Register">
+                                    <a href="">Currency</a>
+                                </li>
+                                <li class="mdc-list-item" role="menuitem" title="Attendance Register">
+                                    <a href="">Classes</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Revenue Components</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                           
+                        </div> -->
+                    <!-- </div>  -->
+                    
+                    <!-- <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Money</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                           
+                        </div>
+                    </div> -->
+        
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">people</i>
+                                 <div class="text-light">Customers</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            
+                        </div>
+                    </div>
+        
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Billing</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+                                  
+                                <li class="mdc-list-item" role="menuitem" title="Attendance summary">
+                                    <a href="">Invoice</a>
+                                </li>
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    <a href="">Bill Single Service</a>
+                                </li>
+                                
+{% for group in user.groups.all %}
+{% if group.name == 'deputy admin' or group.name == 'admin' %}
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    <a href=""> Adjustments</a>
+                                </li>
+                                {%endif%}
+{%endfor%}
+                                <li class="mdc-list-item" role="menuitem" title="Temporary Pass">
+                                    <a href="">Invoiced customer list</a>
+                                </li>
+                               
+                                    
+                            </ul>
+                        </div>
+                    </div>
+        
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Account Management</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+
+                                <li class="mdc-list-item" role="menuitem" title="Attendance Register">
+                                    <a href="">Opening balances </a>
+                                </li>
+    
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    <a href="">Closing balances </a>
+                                </li>
+                                   
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Remittances</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+                                
+
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    <a href="">Remittances </a>
+                                </li>
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    <a href="">Receipting Accounts</a>
+                                </li>
+                                {% for group in user.groups.all %}
+{% if group.name == 'deputy admin' or group.name == 'admin' %}
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    <a href="">Adjustments </a>
+                                </li>
+                                {%endif%}
+                                {%endfor%}
+    
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Notifications</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+    
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    <a href="">Receipts</a>
+                                </li>            
+                            </ul>
+                        </div>
+                    </div>
+
+                        
+                    {% for group in user.groups.all %}
+                    {% if group.name == 'director' or group.name == 'admin' %}
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Reports</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+    
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    <a href="">Fees Statements</a>
+                                </li>
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    <a href="">Sales Report</a>
+                                </li>
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    <a href="">Debtors Report</a>
+                                </li>
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    <a href="">Age Analysis</a>
+                                </li>
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    <a href="">Customers Balances Report</a>
+                                </li>
+                                <!--<li class="mdc-list-item" role="menuitem" title="">
+                                    <a href="{%url 'Beezfees:account_balances'%}">Customer Prepayments</a>
+                                </li>-->
+    
+                            </ul>
+                        </div>
+                    </div>
+                    {%endif%}
+{%endfor%}
+                    
+
+
+
+
+
+                   <!-- <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Payment Plan</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                           
+                        </div>
+                    </div>-->
+
+                    {% for group in user.groups.all %}
+                    {% if group.name == 'technical' %}
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Users</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+    
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    <a href="{%url 'admin:index'%}">Add Users</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    {%endif%}
+                    {%endfor%}
+                   
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Logout</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+    
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    <a href="">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>                
+
+        
+        </nav>
+    </div>
+</aside>
+
+

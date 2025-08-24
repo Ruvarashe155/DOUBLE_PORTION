@@ -1,0 +1,102 @@
+
+
+<nav class="col-md-3 col-lg-2 d-md-block  sidebar collapse">
+<div class= "position-sticky pt-3">
+<ul class="navflex-column text-white">
+
+
+
+
+<ul class="navbar-nav me-auto mb-2 mb-md-0">
+    <li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#budgetsMenu" role="button" aria-expanded="false" >Budgets</a>
+<div class="collapse" id="budgetsMenu">
+    <ul class="nav-flex-column ms-3">
+
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'records:budget'%}" style="color: rgb(65, 209, 65);">Add Budget</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'records:budget_report'%}" style="color: rgb(65, 209, 65);">Budget Report</a>
+        </li>
+
+    </ul>
+
+</div>
+</li>
+
+
+
+ <li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#expenseMenu" role="button" aria-expanded="false" >Expenses</a>
+<div class="collapse" id="expenseMenu">
+    <ul class="nav-flex-column ms-3">
+
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'records:category'%}"  style="color: rgb(65, 209, 65);">Expense Category</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'records:expenses'%}"  style="color: rgb(65, 209, 65);">Expenses</a>
+        </li>
+
+    </ul>
+
+</div>
+</li>
+
+
+
+
+<li class="nav-item">
+<a class="nav-link" href="{% url 'records:staff'%}">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{% url 'records:products'%}">Our Products</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{% url 'records:manufactured_product'%}">Manufactured Products</a>
+
+<li class="nav-item">
+<a class="nav-link" href="{% url 'records:allocating'%}">Allocatons</a>
+</li>
+
+
+<li class="nav-item">
+<a class="nav-link" href="{% url 'records:sales'%}">Sales</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{% url 'records:credits'%}">Credit Payments</a>
+</li>
+
+</li>
+
+
+<li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#stockMenu" role="button" aria-expanded="false" >Stock</a>
+<div class="collapse" id="stockMenu">
+    <ul class="nav-flex-column ms-3">
+
+        <li class="nav-item">
+            <a class="nav-link text-start" href="{% url 'records:product_list'%}"  style="color: rgb(65, 209, 65);">Main Stock</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link text-start" href="{% url 'records:user_report'%}"  style="color: rgb(65, 209, 65);">Seller Stock</a>
+        </li>
+
+    </ul>
+
+</div>
+</li>
+
+
+<li class="nav-item">
+<a class="nav-link" href="{% url 'records:logout'%}">Log Out</a>
+</li>
+
+</ul>
+
+</div>
+</nav>

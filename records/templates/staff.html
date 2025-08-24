@@ -1,0 +1,79 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block content %}
+    <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+        <div class="mdc-card py-2">
+        
+        
+            <h1 class="card-title mb-0" >Staff</h1>
+        </div>
+        </div>
+        
+      
+        <form action="{% url 'records:staff' %}" id="form" method="post" >
+             {% csrf_token %}
+             <input type="hidden" name="id">
+                <div class="row">
+                    <div class="col-7">
+                         <div class="form-group mb-3">
+                        <label >Full Name</label>
+                        <input type="text" name="name" id="name" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                    </div>
+                    </div>
+                    </div>
+
+
+                    
+
+                  <div class="d-flex justify-content-center button-container form-group mb-3">
+                 <center><button type="submit" class="btn btn-secondary me-2">Save</button></center><br>
+                  <center><button type="reset" class="btn btn-primary">Cancel</button></center>
+                </div>
+      
+        </form>
+                   
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card py-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0">Staff List</h4>
+
+            <div class="text-start">
+            
+            </div>
+    
+        </div>
+    </div>
+</div>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="example" border="8">
+                <colgroup>
+                    <col width="20%">
+                    <col width="40%">
+                    
+                    
+                </colgroup>
+                <thead>
+                    <tr>
+                      <th class="text-left py-1">Staff Id</th>
+                        <th class="text-center py-1">Staff Name</th>
+                       
+                      
+                       
+                
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for staff in staff_list%}
+
+                  <tr>
+                    <td class="px-2 py-1 text-center">{{staff.user_id}}</td>
+                   <td class="px-2 py-1 text-left">{{staff.full_name}}</td>
+                     
+                    </tr>
+                    {%endfor%}
+                    
+                </tbody>
+            </table>            
+{%endblock content%}

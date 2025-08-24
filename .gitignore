@@ -1,0 +1,10 @@
+media/
+static/
+_pycache_/
+*.pyc
+*.sqlite3
+env/
+venv/
+*.zip
+*.tar
+*.bak
