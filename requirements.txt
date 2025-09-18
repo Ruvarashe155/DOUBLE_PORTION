@@ -5,6 +5,7 @@
 joblib
 pandas
 scikit-learn
+psycopg2==2.9.3
 
 # aiofiles==24.1.0
 # aiohappyeyeballs==2.6.1
