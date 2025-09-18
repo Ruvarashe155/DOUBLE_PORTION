@@ -297,7 +297,7 @@ pure_eval==0.2.3
 py-cpuinfo==9.0.0
 py-sneakers==1.0.1
 py-ubjson==0.16.1
-pyasn1==0.6.1
+# pyasn1==0.6.1
 pyasn1_modules==0.4.1
 pyasyncore==1.0.2
 pycairo==1.27.0
