@@ -164,7 +164,7 @@ hupper==1.12
 hyperframe==6.0.0
 hyperlink==21.0.0
 idna==3.10
-impacket==0.13.0.dev0
+# impacket==0.13.0.dev0
 importlib_metadata==8.7.0
 incremental==24.7.2
 inflect==7.3.1
