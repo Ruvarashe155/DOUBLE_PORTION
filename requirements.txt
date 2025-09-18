@@ -188,7 +188,7 @@ jwcrypto==1.5.6
 kaitaistruct==0.10
 # kali-tweaks==2023.3.2
 # KismetCaptureBtGeiger==2021.7.1
-KismetCaptureFreaklabsZigbee==2018.7.0
+# KismetCaptureFreaklabsZigbee==2018.7.0
 KismetCaptureRtl433==2020.10.1
 KismetCaptureRtladsb==2020.10.1
 KismetCaptureRtlamr==2020.10.1
