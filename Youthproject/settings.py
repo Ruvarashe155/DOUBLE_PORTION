@@ -83,9 +83,9 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': '',
         'PORT': 3306,
-        'OPTIONS': {
-            'unix_socket': '/opt/lampp/var/mysql/mysql.sock', # <--- **Crucial: Use the path you found**
-        },
+        # 'OPTIONS': {
+        #     'unix_socket': '/opt/lampp/var/mysql/mysql.sock', # <--- **Crucial: Use the path you found**
+        # },
         #'HOST': 'localhost'
 
     }
