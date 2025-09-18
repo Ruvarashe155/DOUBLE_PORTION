@@ -200,7 +200,7 @@ ldap3==2.9.1
 ldapdomaindump==0.9.4
 legacy-cgi==2.6.3
 legacycrypt==0.3
-lightdm-gtk-greeter-settings==1.2.3
+# lightdm-gtk-greeter-settings==1.2.3
 limits==4.4.1
 linkify-it-py==2.0.3
 log_symbols==0.0.14
