@@ -53,13 +53,23 @@
 <a class="nav-link" href="{% url 'records:staff'%}">Staff</a>
 </li>
 <li class="nav-item">
+<a class="nav-link" href="{% url 'records:cashier'%}">Cashier's Report</a>
+</li>
+<li class="nav-item">
 <a class="nav-link" href="{% url 'records:products'%}">Our Products</a>
+<li class="nav-item">
+<a class="nav-link" href="{% url 'records:product_variant'%}">Products</a>
+</li>
 </li>
 <li class="nav-item">
 <a class="nav-link" href="{% url 'records:manufactured_product'%}">Manufactured Products</a>
 
 <li class="nav-item">
-<a class="nav-link" href="{% url 'records:allocating'%}">Allocatons</a>
+<a class="nav-link" href="{% url 'records:packing_product'%}">Packing</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="{% url 'records:allocating'%}">Allocations</a>
 </li>
 
 
@@ -79,8 +89,13 @@
     <ul class="nav-flex-column ms-3">
 
         <li class="nav-item">
-            <a class="nav-link text-start" href="{% url 'records:product_list'%}"  style="color: rgb(65, 209, 65);">Main Stock</a>
+            <a class="nav-link text-start" href="{% url 'records:product_list'%}"  style="color: rgb(65, 209, 65);">Unpacked Stock</a>
         </li>
+
+         <li class="nav-item">
+            <a class="nav-link text-start" href="{% url 'records:packed_stock'%}"  style="color: rgb(65, 209, 65);">Packed Stock</a>
+        </li>
+
 
         <li class="nav-item">
             <a class="nav-link text-start" href="{% url 'records:user_report'%}"  style="color: rgb(65, 209, 65);">Seller Stock</a>

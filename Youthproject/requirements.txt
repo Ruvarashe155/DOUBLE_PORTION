@@ -1,4 +1,4 @@
-types-pytz==2024.2
+types-pytz==2024.2.0.20240913
 types-pywin32==308
 types-pyxdg==0.28
 types-PyYAML==6.0

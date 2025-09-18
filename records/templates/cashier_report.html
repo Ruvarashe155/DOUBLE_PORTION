@@ -1,0 +1,162 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block content %}
+
+  
+       
+        
+        <div class="modal-header">
+            <center><h1 class="modal-title">Cashier's Report</h1></center>
+        </div>
+
+ <div class="container-fluid">
+        <form action="{% url 'records:cashier' %}" id="form" method="post" class="form-group">
+             {% csrf_token %}
+             <input type="hidden" name="id">
+                <div class="row">
+                     <div class="col-4">
+                        <div class="form-group mb-3">
+                        <label for="date" class="control-label" >Date</label>
+                        <input type="date" name="date" id="date" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                        </div>
+                    </div>
+
+
+                    
+                     <div class="col-4">
+                        <div class="form-group mb-3">
+
+                        <label for="product_name" class="control-label">Seller</label>
+                        <select type="text" name="source" id="source" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                            <option  value="" disabled selected>-select-seller-</option>
+                            {% for name in sellers%}
+                            <option value="{{name.user_id}}">{{name.full_name}}</option>
+                            {%endfor%}
+                        </select>
+                       </div>
+                    </div>
+
+
+                     <div class="col-4">
+                        <div class="form-group mb-3">
+                        <label for="cost" class="control-label" >Transaction Type</label>
+                            <select type="text" name="type" id="type" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                                <option value="" disabled selected>Select the type</option>
+                                
+                                
+                                <!-- <option value="{{type}}">{{type}}</option> -->
+                                 <option value="RECEIVE">Received</option>
+                                  <option value="RELEASE">Released</option>
+                                
+                            </select>
+                        </div>
+                        </div>
+                        
+
+                      <div class="col-4">
+                        <div class="form-group mb-3">
+
+                        <label for="cost" class="control-label" >Amount</label>
+                        <input type="number" name="amount" id="amount" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                        </div>
+                        </div>
+
+                       
+
+                        
+
+                    
+
+
+                     <div class="col-4">
+                        <div class="form-group mb-3">
+
+                        <label for="description" class="control-label">Description</label>
+                        <input type="text" name="description" id="description" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                    </div>
+                    </div>
+
+                 
+                        
+                 <div class="d-flex justify-content-center button-container form-group mb-3">
+                 <center><button type="submit" class="btn btn-secondary me-2">Save</button></center><br>
+                  <center><button type="reset" class="btn btn-primary">Cancel</button></center>
+                </div>
+                </div>
+        </form>
+
+        <!-- <p>Total Cash Sales: {{total_cash_sales}}</p>
+        <p>Total Credit Sales: {{total_credit_sales}}</p> -->
+
+                   
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card py-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0">Cashier's Report List</h4>
+
+            <div class="text-start">
+            
+            </div>
+    
+        </div>
+    </div>
+</div>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="example" border="8">
+                <colgroup>
+                    <col width="15%">
+                    <col width="15%">
+                    <col width="20%">
+                    <col width="5%">
+                    <col width="25%">
+                    
+                   
+                    
+                    
+                    
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="text-center py-1">Date</th>
+                        <th class="text-center py-1">From</th>
+                      <th class="text-left py-1">Transaction Type</th>
+                        <th class="text-center py-1">Amount</th>
+                         <th class="text-left py-1">Description</th>
+                         <th class="text-left py-1">Total Received</th>
+                         <th class="text-left py-1">Total Released</th>
+                         <th class="text-left py-1">Balance</th>
+                        
+                       
+                
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for report in cashier_list%}
+
+                  <tr>
+                    <td class="px-2 py-1 text-center">{{report.date}}</td>
+                    <td class="px-2 py-1 text-right">{{report.source.full_name}}</td>
+                    <td class="px-2 py-1 text-left">{{report.type}}</td> 
+                     <td class="px-2 py-1 text-left">{{report.amount}}</td> 
+                    <td class="px-2 py-1 text-left">{{report.description}}</td>
+                     
+                    
+                    </tr>
+                    {%endfor%}
+                    
+                </tbody>
+                  <tfoot>
+                    <tr style="font-weight: bold;">
+                        <td colspan="5" style="text-align: right;">TOTAL</td>
+                        <td>{{received}}</td>
+                         <td>{{released}}</td>
+                          <td>{{balance}}</td>
+
+
+                    </tr>
+                </tfoot>
+                
+            </table>                          
+{%endblock content%}

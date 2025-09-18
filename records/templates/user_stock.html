@@ -35,12 +35,12 @@
                     <tr>
                        
                        
-                      <th class="text-left py-1">User</th>
-                        <th class="text-left py-1">Product </th>
-                         <th class="text-left py-1">Units</th>
-                        <th class="text-left py-1">Allocated</th>
-                        <th class="text-left py-1">Sold</th>
-                        <th class="text-left py-1">Remaining</th>
+                      <th class="text-left py-1">USER</th>
+                        <th class="text-left py-1">PRODUCT </th>
+                         <th class="text-left py-1">UNIT</th>
+                        <th class="text-left py-1">ALLOCATED</th>
+                        <th class="text-left py-1">SOLD</th>
+                        <th class="text-left py-1">REMAINING</th>
                         
                       
                        
@@ -54,7 +54,7 @@
                   <tr>
                     <td class="px-2 py-1 text-left">{{stock.user}}</td>
                    <td class="px-2 py-1 text-left">{{stock.product}}</td>
-                    <td class="px-2 py-1 text-left">{{stock.units}}</td>
+                    <td class="px-2 py-1 text-left">{{stock.unit_size}}   {{stock.units}}</td>
                       <td class="px-2 py-1 text-right" style="text-align: right;">{{stock.allocated|intcomma}}</td>
                        <td class="px-2 py-1 text-right" style="text-align: right;">{{stock.sold}}</td>
                         <td class="text-ri" style="text-align: right;">{{stock.remaining}}</td>

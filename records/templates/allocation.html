@@ -35,7 +35,7 @@
                         <select type="text" name="product" id="product" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
                             <option  value="" disabled selected>-select-product-</option>
                             {% for product in products%}
-                            <option value="{{product.product_id}}">{{product.product_name}}:{{product.units}}</option>
+                            <option value="{{product.product_var_id}}">{{product.product.product_name}}   {{product.unit_size}}  {{product.unit}}</option>
                             {%endfor%}
                         </select>
                     </div>
@@ -46,29 +46,79 @@
                         <label >Quantity</label>
                         <input type="number" name="quantity" id="quantity" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
                  </div>
-                            
+
+                    <div class="col-4">
+                <div class="form-group mb-3">
+
+                <label for="cost" class="control-label" >Cost</label>
+                <input type="number" name="cost" id="cost" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                </div>
+                </div>  
                         
                     
-                 
+                  <div class="col-4">
+                        <label >Unit Size</label>
+                        <input type="number" name="unit_size" id="unit_size" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                    </div>
 
 
                  <div class="col-4">
                         <label >Units</label>
-                        <select type="text" name="units" id="units" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
-                            <option value="" disabled selected>-select units-</option>
-                            {% for product in product_list%}
-                            <option value="{{product.product.units}}">{{product.product.units}}</option>
-                            {%endfor%}
-                        </select>
+                        <input type="text" name="units" id="units" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                            
+                            
                     </div>
-                 
+                  
 
                   <div class="d-flex justify-content-center button-container form-group mb-3">
                  <center><button type="submit" class="btn btn-secondary me-2">Save</button></center><br>
                   <center><button type="reset" class="btn btn-primary">Cancel</button></center>
                 </div>
+
+            </div>
+               
+      
+        </form>
+        <form>
+             <div class="row">
+
+                        <div class="col-4">
+                        <label >Filter by Date</label>
+                        <input type="date" name="datefilter" id="datefilter" placeholder="" class="form-control form-control-sm rounded-0" value="" >
+                            
+                        </div>
+
+
+                    <div class="col-4">
+                        <label >Product</label>
+                        <select type="text" name="productfilter" id="productfilter" placeholder="" class="form-control form-control-sm rounded-0" value="" >
+                            <option  value="" disabled selected>-select-product-</option>
+                            {% for product in products%}
+                            <option value="{{product.product_var_id}}">{{product.product.product_name}}   {{product.unit_size}}  {{product.unit}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
+                 
+
+                    <div class="col-4">
+                        <label >Filter by Seller</label>
+                        <select type="text" name="sellerfilter" id="sellerfilter" placeholder="" class="form-control form-control-sm rounded-0" value="" >
+                            <option  value="" disabled selected>-select-product-</option>
+                            {% for seller in sellers%}
+                            <option value="{{seller.user_id}}">{{seller.full_name}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
+
+                    
+                 
+                  <div class="d-flex justify-content-center button-container form-group mb-3">
+                 <center><button type="submit" class="btn btn-secondary me-2">Filter</button></center><br>
+                  <!-- <center><button type="reset" class="btn btn-primary">Cancel</button></center> -->
+                </div>
                 </div>
       
+
         </form>
 
                    
@@ -103,6 +153,9 @@
                         <th class="text-center py-1">Product </th>
                          <th class="text-center py-1">Units </th>
                         <th class="text-center py-1">Quantity </th>
+                        <th class="text-center py-1">Cost </th>
+                         <th class="text-center py-1">Total Cost </th>
+                         <th class="text-center py-1">Expected Amount </th>
                        
                        
                     </tr>
@@ -113,14 +166,25 @@
                   <tr>
                     <td class="px-2 py-1 text-center">{{allo.date}}</td>
                    <td class="px-2 py-1 text-left">{{allo.user_id.full_name}}</td>
-                    <td class="px-2 py-1 text-left">{{allo.man_id.product.product_id}}:{{allo.man_id.product.product_name}}</td> 
-                     <td class="px-2 py-1 text-center">{{allo.man_id.product.units}}</td>  
+                    <td class="px-2 py-1 text-left">{{allo.pack_id.product.product_id}}:{{allo.pack_id.product.product.product_name}}</td> 
+                     <td class="px-2 py-1 text-center">{{allo.unit_size}}  {{allo.units}}</td>  
                      <td class="px-2 py-1 text-center">{{allo.quantity}}</td>
+                      <td class="px-2 py-1 text-center">{{allo.cost}}</td>
+                      <td class="px-2 py-1 text-center">{{allo.total_cost}}</td>
+
                      
                     </tr>
                     {%endfor%}
                     
                 </tbody>
+                 <tfoot>
+                    <tr style="font-weight: bold;">
+                        <td colspan="7" style="text-align: right;">TOTAL EXPECTED</td>
+                        <td>{{expected_total}}</td>
+                         <td>{{total_credit_sales}}</td>
+
+                    </tr>
+                </tfoot>
             </table>
             </div>
             </div>

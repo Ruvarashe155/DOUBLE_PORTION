@@ -1,0 +1,122 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block content %}
+
+  
+       
+        
+        <div class="modal-header">
+            <center><h1 class="modal-title">Packed Products</h1></center>
+        </div>
+        
+        <form action="{% url 'records:packing_product' %}" id="form" method="post" >
+             {% csrf_token %}
+                
+                <div class="row">
+                     <div class="col-4">
+                        <label >Date</label>
+                        <input type="date" name="date" id="date" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                    </div>
+
+
+                    <div class="col-4">
+                        <label >Product Name</label>
+                        <select type="text" name="product_name" id="product_name" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                            <option  value="" disabled selected>-select-product-</option>
+                            {% for name in product%}
+                            <option value="{{name.product_var_id}}">{{name.product.product_name}}   {{name.unit_size}}{{name.unit}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
+
+                    
+            
+
+                  <div class="col-4">
+                        <label >Quantity</label>
+                        <input type="number" name="quantity" id="quantity" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                    </div>
+
+                     <div class="col-4">
+                        <label >Unit Size</label>
+                        <input type="number" name="unit_size" id="unit_size" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                    </div>
+
+                    
+                    <div class="col-4">
+                        <label class="control-label">Units</label>
+                        <input type="text" name="units" id="units" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                    
+                 </div>
+                </div>
+
+
+                  
+
+                 <div class="d-flex justify-content-center button-container form-group mb-3">
+                 <center><button type="submit" class="btn btn-secondary me-2">Save</button></center><br>
+                  <center><button type="reset" class="btn btn-primary">Cancel</button></center>
+                </div>
+        </form>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card py-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0">Packed Products List</h4>
+
+            <div class="text-start">
+            
+            </div>
+    
+        </div>
+    </div>
+</div>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="example" border="8">
+                <colgroup>
+                    <col width="5%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="5%">
+                    <col width="5%">
+                    <col width="5%">
+                     <col width="20%">
+                   
+                   
+                    
+                </colgroup>
+                <thead>
+                    <tr>
+                      <th class="text-left py-1">Product Id</th>
+                        <th class="text-center py-1">Date</th>
+                        <th class="text-center py-1">Product Name</th>
+                        <th class="text-center py-1">Quantity</th>
+                         <th class="text-center py-1">Unit Size</th>
+                         <th class="text-center py-1">Units</th>
+                      
+                        <th class="text-left py-1">Description</th>
+                      
+                       
+                
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for product in packed_product_list%}
+
+                  <tr>
+                    <td class="px-2 py-1 text-center">{{product.pack_id}}</td>
+                    <td class="px-2 py-1 text-center">{{product.date}}</td>
+                   <td class="px-2 py-1 text-left">{{product.product.product.product_name}}</td>
+                    <td class="px-2 py-1 text-center">{{product.quantity}}</td>
+                     <td class="px-2 py-1 text-center">{{product.unit_size}}</td>
+                     <td class="px-2 py-1 text-center">{{product.unit}}</td>
+                    <td class="px-2 py-1 text-left">{{product.description}}</td>   
+                    </tr>
+                    {%endfor%}
+                    
+                </tbody>
+            </table>            
+                   
+               
+{%endblock content%}

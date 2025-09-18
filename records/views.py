@@ -6,6 +6,11 @@ from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.contrib import messages
+from datetime import date
+
+
+
+
 
 
 
@@ -63,9 +68,9 @@ def staff(request):
 def products(request):
     if request.method=='POST':
         product_name=request.POST.get('product_name')
-        description=request.POST.get('description')
+        # description=request.POST.get('description')
         units=request.POST.get('units')
-        cost=request.POST.get('cost')
+        # cost=request.POST.get('cost')
 
         last_product = our_product.objects.order_by('-product_id').first()
         if last_product:
@@ -75,13 +80,41 @@ def products(request):
                 new_product_number = 1
 
         product_id = f"PDT{new_product_number:03}"
-        save_product = our_product( product_id=product_id,product_name=product_name,description=description,units=units, cost=cost)
+        save_product = our_product( product_id=product_id,product_name=product_name,units=units, )
         save_product.save()
     context ={
         'product_list': our_product.objects.all().order_by('-product_id')
     }
 
     return render(request, 'products.html', context)
+
+
+def products_var(request):
+    if request.method=='POST':
+        product_name=request.POST.get('product_name')
+        unit_size=request.POST.get('unit_size')
+        units=request.POST.get('units')
+
+        product_name=our_product.objects.get(product_id=product_name)
+        
+
+        last_product = product_variant.objects.order_by('-product_var_id').first()
+        if last_product:
+            last_product_number = int(last_product.product_var_id[3:])
+            new_product_number = last_product_number + 1
+        else:
+                new_product_number = 1
+
+        product_id = f"PDV{new_product_number:03}"
+        save_product = product_variant( product_var_id=product_id,product=product_name,unit=units,unit_size=unit_size )
+        save_product.save()
+    context ={
+        'product_list': our_product.objects.all(),
+        'products':product_variant.objects.all()
+    }
+
+    return render(request, 'product_variant.html', context)
+
 
 @login_required
 def manufactured_product(request):
@@ -124,13 +157,68 @@ def manufactured_product(request):
               'manufactured_product_list': manufactured_products.objects.all().order_by('-m_id')
               }
     return render(request, 'manufactured_products.html', context)
+
+
+@login_required
+def packing_product(request):
+    if request.method=='POST':
+        products_name=request.POST.get('product_name')
+        quantity=request.POST.get('quantity')
+        date = request.POST.get('date')
+        units=request.POST.get('units')
+        unit_size=request.POST.get('unit_size')
+
+
+        last_packed_products = packing.objects.order_by('-pack_id').first()
+        if last_packed_products:
+            last_product_number = int(last_packed_products.pack_id[3:])
+            new_products_number = last_product_number + 1
+        else:
+                new_products_number = 1
+    
+        product=product_variant.objects.get(product_var_id=products_name)
+        pack_id = f"PCK{new_products_number:03}"
+        products_packed = packing(pack_id=pack_id,quantity=quantity,date=date,unit=units,unit_size=unit_size,product=product)
+        products_packed.save()
+        
+        
+           
+
+    context= {'product':product_variant.objects.all(),
+              'packed_product_list': packing.objects.all().order_by('-pack_id'),
+              
+              }
+    return render(request, 'packing.html', context)
+
+
+
 from django.db.models import Sum, F
 @login_required
 def sales_report(request):
+    sale=sales.objects.all()
+    date_filter=request.GET.get('datefilter')
+    product_filter=request.GET.get('productfilter')
+    seller_filter=request.GET.get('sellerfilter')
+    
+        
+
+    if date_filter:
+        sale=sales.objects.filter(date=date_filter).all()
+    elif product_filter:
+        sale=sales.objects.filter(product=product_filter)  
+    elif seller_filter:
+        sale=sales.objects.filter(user=seller_filter) 
+    elif date_filter and product_filter:
+        sale = sales.objects.filter(date=date_filter,product=product_filter )       
+    else:
+        sale=sales.objects.all()
+
+
     if request.method=='POST':
         product_name=request.POST.get('product_name')
         quantity=float(request.POST.get('quantity'))
         description=request.POST.get('description')
+        # return HttpResponse(product_name)
         date = request.POST.get('date')
         cost = request.POST.get('cost')
         status=request.POST.get('status')
@@ -138,7 +226,8 @@ def sales_report(request):
 
         
         total_cost= float(cost)* float(quantity)
-        product_name=our_product.objects.get(product_id=product_name)
+        product_name=product_variant.objects.get(product_var_id=product_name)
+        
         user = users.objects.get(user_id=user)
         remaining_stock=user.get_remaining(product_name)
 
@@ -161,11 +250,13 @@ def sales_report(request):
     total_cash_sales=cash_sales+credit_paid
 
     
-    context= {'product':our_product.objects.all(),
-              'sales_list':sales.objects.all().order_by('-id'),
+    context= {'product':product_variant.objects.all(),
+            #   'sales_list':sales.objects.all().order_by('-id'),
+            'sales_list':sale.order_by('-id'),
               'user_list':users.objects.all(),
               'total_cash_sales':total_cash_sales,
-              'total_credit_sales':total_credit_sales
+              'total_credit_sales':total_credit_sales,
+              
               }
     
     return render(request, 'sales.html', context)
@@ -201,23 +292,52 @@ def stocking(request):
 
 @login_required
 def allocating(request):
+    allocations=allocation.objects.all()
+    date_filter=request.GET.get('datefilter')
+    product_filter=request.GET.get('productfilter')
+    seller_filter=request.GET.get('sellerfilter')
+    # return HttpResponse(product_filter)
+    
+    
+        
+
+    if date_filter:
+        allocations=allocation.objects.filter(date=date_filter).all()
+    elif product_filter:
+        # allocations=allocation.objects.filter(pack_id__product=product_filter)  
+        allocations=allocation.objects.filter(pack_id=packing.objects.filter(product=product_variant.objects.filter(product_var_id=product_filter).first()).first())
+    elif seller_filter:
+        allocations=allocation.objects.filter(user_id=seller_filter)    
+    else:
+        allocations=allocation.objects.all()
+
+
     if request.method=='POST':
         user = request.POST.get('name')
         product = request.POST.get('product')
+        # return HttpResponse(product)
         date = request.POST.get('date')
         quantity = int(request.POST.get('quantity'))
+        unit_size=request.POST.get('unit_size')
         units = request.POST.get('units')
+        cost = request.POST.get('cost')
+
+        total_cost= float(cost)* float(quantity)
 
         user = users.objects.get(user_id=user)
-        product = manufactured_products.objects.get(product=product)
+        allo = packing.objects.filter(product=product_variant.objects.get(product_var_id=product)).first()
+
+        product = packing.objects.filter(product=product_variant.objects.get(product_var_id=product)).first()
 
         products=product.product
         available_stock=products.current_stock()
+
+        
         
         if quantity > available_stock:
-            messages.error(request, "Allocation failed: Not enough stock available !!")
+             messages.error(request, "Allocation failed: Not enough stock available !!")
         else:    
-            allo = allocation(man_id=product, user_id=user, date=date,quantity=quantity, units=units )
+            allo = allocation(pack_id=allo, user_id=user, date=date,quantity=quantity, units=units, unit_size=unit_size,cost=cost, total_cost=total_cost )
             allo.save()
             messages.success(request, "Product allocated successfully")
 
@@ -227,13 +347,18 @@ def allocating(request):
             stockk.col_allo_stat="ALLOCATED"
             stockk.save()
 
+    total_expected=allocation.objects.filter(user_id=seller_filter).aggregate(Sum('total_cost'))['total_cost__sum'] or 0
+ 
     context = {
-          'name_list':users.objects.all(),
-          'product_list':manufactured_products.objects.all(),
-          'allocation_list':allocation.objects.all().order_by('-id'),
-          'products':our_product.objects.all()
+        'name_list':users.objects.all(),
+        'product_list':manufactured_products.objects.all(),
+        #   'allocation_list':allocation.objects.all().order_by('-id'),
+        'allocation_list':allocations.order_by('-id'),
+        'products':product_variant.objects.all(),
+        'sellers':users.objects.all(),
+        'expected_total': total_expected,
 
-     }
+    }
     return render(request, 'allocation.html', context)
 
 
@@ -250,11 +375,21 @@ def product_list(request):
     }
     return render(request, 'stock.html' ,context)
 
+@login_required
+def packed_stock(request):
+    products=product_variant.objects.all()
+    context= {
+        'products':products
+    }
+    return render(request, 'packed_stock.html' ,context)
+
+
+
 
 @login_required
 def user_stock_report(request):
     users_list = users.objects.all()
-    products_list =our_product.objects.all()
+    products_list =product_variant.objects.all()
 
     report = []
     for user in users_list:
@@ -263,7 +398,9 @@ def user_stock_report(request):
             sold =user.get_sold(product)
             remaining =user.get_remaining(product)
             if allocated>0 or sold>0:
-                report.append({'user':user.full_name, 'product':product.product_name,'units':product.units, 'allocated':allocated, 'sold':sold, 'remaining':remaining})
+                stock=user_stock_record(user=user.full_name, product=product.product.product_name,unit_size= product.unit_size,unit=product.unit,allocated=allocated, sold=sold, remaining=remaining,date=date.today())
+                stock.save()
+                report.append({'user':user.full_name, 'product':product.product.product_name,'unit_size': product.unit_size,'units':product.unit, 'allocated':allocated, 'sold':sold, 'remaining':remaining})
     return render(request, 'user_stock.html', {'report':report})
 
 
@@ -387,4 +524,82 @@ def credit_payments(request):
     return render(request, 'credit_payments.html', {'sellers':users.objects.all(), 'credits':credit_payment.objects.all()})    
 
 
+def cashier(request):
+    if request.method=='POST':
+        date =request.POST.get('date')
+        source =request.POST.get('source')
+        type =request.POST.get('type')
+        amount =request.POST.get('amount')
+        description =request.POST.get('description')
+        # return HttpResponse(source)
 
+        seller=users.objects.get(user_id=source)
+
+        report=cashier_report(date=date, source=seller, type=type, amount=amount, description=description)
+        report.save()
+        messages.success(request,'Transaction successfully saved')
+    transactions=cashier_report.objects.all()
+    total_received= transactions.filter(type='RECEIVE').aggregate(Sum('amount'))['amount__sum'] or 0
+    total_released= transactions.filter(type='RELEASE').aggregate(Sum('amount'))['amount__sum'] or 0
+    balance=total_received-total_released
+    context={
+        'sellers':users.objects.all(),
+        'types':cashier_report.TransactionType.choices,
+        'cashier_list':cashier_report.objects.all(),
+        'received':total_received,
+        'released':total_released,
+        'balance':balance
+    }
+
+    return render(request, 'cashier_report.html', context)    
+        
+
+
+# records/views.py
+  # we'll separate ML code here for cleanliness
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .ml_utils import predict_stock  # Machine Learning utility
+
+@csrf_exempt
+def predict_remaining_view(request):
+    if request.method == 'GET':
+        try:
+            # Extract parameters from GET request
+            user = request.GET.get('user')
+            product = request.GET.get('product')
+            unit_size = float(request.GET.get('unit_size'))
+            allocated = float(request.GET.get('allocated'))
+            sold = float(request.GET.get('sold'))
+
+            # Validate input
+            if not all([user, product]):
+                return JsonResponse({'error': 'Missing user or product name'}, status=400)
+
+            # Call ML model for prediction
+            prediction = predict_stock(user, product, unit_size, allocated, sold)
+
+            return JsonResponse({'predicted_remaining': prediction})
+
+        except ValueError:
+            return JsonResponse({'error': 'unit_size, allocated, and sold must be numbers'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Only GET method allowed'}, status=405)
+
+
+
+
+
+
+def stock_prediction_page(request):
+    user_list = users.objects.all()
+    products = product_variant.objects.all()
+
+    context = {
+        'user_list': user_list,
+        'products': products,
+    }
+    return render(request, 'predict.html', context)

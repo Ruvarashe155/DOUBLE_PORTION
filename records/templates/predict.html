@@ -1,0 +1,81 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block content %}
+
+<h2>AI-Powered Stock Predictor</h2>
+
+<form id="predictForm"  action="{% url 'predict_remaining' %}" method="get">
+    <div class="row">
+  
+
+  <div class="col-4">
+    <label >Name</label>
+    <select type="text" name="user"  placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+        <option  value="" disabled selected>-select-the-seller</option>
+        {%for name in user_list%}
+        <option value="{{name.id}}">{{name.full_name}}</option>
+        {%endfor%}
+    </select>
+</div>
+
+
+
+    <div class="col-4">
+    <label >Product</label>
+    <select type="text" name="product" id="product" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+        <option  value="" disabled selected>-select-product-</option>
+        {% for product in products%}
+        <option value="{{product.product_var_id}}">{{product.product.product_name}}   {{product.unit_size}}  {{product.unit}}</option>
+        {%endfor%}
+    </select>
+</div>
+
+  <div class="col-4">
+    <label >Unit Size</label>
+     <input type="number" step="0.01" name="unit_size" class="form-control form-control-sm rounded-0" required>
+  </div>
+
+     <div class="col-4">
+    <label >Allocated</label>
+    <input type="number" step="0.01" name="allocated" class="form-control form-control-sm rounded-0" required>
+    </div>
+
+     <div class="col-4">
+    <label >Sold</label>
+    <input type="number" step="0.01" name="sold" class="form-control form-control-sm rounded-0" required>
+    </div>
+
+    </div>
+
+  <!-- <label>Unit Size: <input type="number" step="0.01" name="unit_size" required></label><br>
+  <label>Allocated: <input type="number" step="0.01" name="allocated" required></label><br>
+  <label>Sold: <input type="number" step="0.01" name="sold" required></label><br>
+  </div> -->
+
+  <button type="submit">Predict Remaining</button>
+</form>
+
+<h3 id="result"></h3>
+
+<script>
+  document.getElementById('predictForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const queryParams = new URLSearchParams(formData).toString();
+
+    fetch(`/predict/?${queryParams}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.predicted_remaining !== undefined) {
+          document.getElementById('result').innerText = `Predicted Remaining: ${data.predicted_remaining}`;
+        } else {
+          document.getElementById('result').innerText = `Error: ${data.error}`;
+        }
+      })
+      .catch(error => {
+        document.getElementById('result').innerText = `Request failed: ${error}`;
+      });
+  });
+</script>
+{%endblock content%}

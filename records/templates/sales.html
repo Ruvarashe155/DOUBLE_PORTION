@@ -29,7 +29,7 @@
                         <select type="text" name="product_name" id="product_name" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
                             <option  value="" disabled selected>-select-product-</option>
                             {% for name in product%}
-                            <option value="{{name.product_id}}">{{name.product_name}} :{{name.units}}</option>
+                            <option value="{{name.product_var_id}}">{{name.product.product_name}}   {{name.unit_size}}  {{name.unit}}</option>
                             {%endfor%}
                         </select>
                        </div>
@@ -96,6 +96,48 @@
                 </div>
         </form>
 
+        <form>
+             <div class="row">
+
+                        <div class="col-4">
+                        <label >Filter by Date</label>
+                        <input type="date" name="datefilter" id="datefilter" placeholder="" class="form-control form-control-sm rounded-0" value="" >
+                            
+                        </div>
+
+
+                     <div class="col-4">
+                        <label >Filter by Product</label>
+                        <select type="text" name="productfilter" id="productfilter" placeholder="" class="form-control form-control-sm rounded-0" value="" >
+                            <option  value="" disabled selected>-select-product-</option>
+                            {% for product in product%}
+                            <option value="{{product.product_id}}">{{product.product_name}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
+
+                    <div class="col-4">
+                        <label >Filter by Seller</label>
+                        <select type="text" name="sellerfilter" id="sellerfilter" placeholder="" class="form-control form-control-sm rounded-0" value="" >
+                            <option  value="" disabled selected>-select-product-</option>
+                            {% for seller in user_list%}
+                            <option value="{{seller.user_id}}">{{seller.full_name}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
+
+                    
+                 
+                  <div class="d-flex justify-content-center button-container form-group mb-3">
+                 <center><button type="submit" class="btn btn-secondary me-2">Filter</button></center><br>
+                  <!-- <center><button type="reset" class="btn btn-primary">Cancel</button></center> -->
+                </div>
+                </div>
+      
+
+        </form>
+
+
         <!-- <p>Total Cash Sales: {{total_cash_sales}}</p>
         <p>Total Credit Sales: {{total_credit_sales}}</p> -->
 
@@ -118,13 +160,17 @@
             <table class="table table-striped table-bordered" id="example" border="8">
                 <colgroup>
                     <!-- <col width="5%"> -->
-                    <col width="15%">
-                    <col width="15%">
+                    <col width="10%">
+                    <col width="10%">
                     <col width="20%">
-                    <col width="25%">
+                    <col width="20%">
                     <col width="5%">
                     <col width="5%">
                     <col width="10%">
+                    <col width="10%">
+                    <col width="20%">
+                    <col width="20%">
+
                     
                     
                     
@@ -154,7 +200,7 @@
                   <tr>
                     <!-- <td class="px-2 py-1 text-center">{{product.id}}</td> -->
                     <td class="px-2 py-1 text-center">{{product.date}}</td>
-                   <td class="px-2 py-1 text-left">{{product.product.product_name}}:{{product.product.units}}</td>
+                   <td class="px-2 py-1 text-left">{{product.product.product.product_name}}{{product.product.units}}</td>
                     <td class="px-2 py-1 text-right">{{product.user.full_name}}</td>
                     <td class="px-2 py-1 text-left">{{product.description}}</td> 
                      <td class="px-2 py-1 text-left">{{product.status}}</td> 
