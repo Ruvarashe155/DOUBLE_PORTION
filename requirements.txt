@@ -234,7 +234,7 @@ msldap==0.5.10
 multidict==6.4.3
 mysqlclient==1.4.6
 nassl==5.3.0
-ndiff==0.0.0
+# ndiff==0.0.0
 neo4j==5.2.dev0
 neobolt==1.7.17
 neotime==1.7.4
