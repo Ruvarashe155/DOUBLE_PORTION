@@ -351,7 +351,7 @@ pyramid==2.0.2
 # PySecretSOCKS==0.9.1
 pyserial==3.5
 pyserial-asyncio==0.6
-pyShodan==0.2.6
+# pyShodan==0.2.6
 pysmbc==1.0.25.1
 pysmi==0.3.4
 pysnmp==4.4.12
