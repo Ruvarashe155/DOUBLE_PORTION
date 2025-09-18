@@ -204,7 +204,7 @@ legacycrypt==0.3
 limits==4.4.1
 linkify-it-py==2.0.3
 log_symbols==0.0.14
-louis==3.33.0
+# louis==3.33.0
 lsassy==3.1.11
 lxml==5.4.0
 lz4==4.4.0+dfsg
