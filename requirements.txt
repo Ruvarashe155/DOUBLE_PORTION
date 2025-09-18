@@ -317,7 +317,7 @@ pyfiglet==1.0.2
 pygame==2.6.1
 pygexf==0.2.2
 Pygments==2.18.0
-PyGObject==3.50.0
+# PyGObject==3.50.0
 pygraphviz==1.14
 PyHamcrest==2.1.0
 pyinotify==0.9.6
