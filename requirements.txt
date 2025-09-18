@@ -257,7 +257,7 @@ oscrypto==1.3.0
 ospd-openvas==22.9.0
 packaging==25.0
 paho-mqtt==2.1.0
-pandas==2.2.3+dfsg
+# pandas==2.2.3+dfsg
 paramiko==3.5.1
 parso==0.8.4
 passlib==1.7.4
