@@ -189,9 +189,9 @@ kaitaistruct==0.10
 # kali-tweaks==2023.3.2
 # KismetCaptureBtGeiger==2021.7.1
 # KismetCaptureFreaklabsZigbee==2018.7.0
-KismetCaptureRtl433==2020.10.1
-KismetCaptureRtladsb==2020.10.1
-KismetCaptureRtlamr==2020.10.1
+# KismetCaptureRtl433==2020.10.1
+# KismetCaptureRtladsb==2020.10.1
+# KismetCaptureRtlamr==2020.10.1
 kiwisolver==1.4.7
 kombu==5.5.3
 lazr.restfulclient==0.14.6
