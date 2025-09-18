@@ -217,7 +217,7 @@ MarkupSafe==2.1.5
 marshmallow==3.26.1
 marshmallow-sqlalchemy==1.4.1
 masky==0.2.0
-matplotlib==3.10.1+dfsg1
+matplotlib== 2.0.0
 matplotlib-inline==0.1.7
 md2pdf==1.0.1
 mdurl==0.1.2
