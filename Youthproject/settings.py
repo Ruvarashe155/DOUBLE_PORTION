@@ -94,18 +94,23 @@ WSGI_APPLICATION = 'Youthproject.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'dp_kvv1',
+#         'USER': 'dp',
+#         'PASSWORD': 'OmEC0nxfjV1gGggvF7dxEzi0zz0Xldlz',
+#         'HOST': 'dpg-d364d3fdiees738qf010-a',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dp_kvv1',
-        'USER': 'dp',
-        'PASSWORD': 'OmEC0nxfjV1gGggvF7dxEzi0zz0Xldlz',
-        'HOST': 'dpg-d364d3fdiees738qf010-a',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
