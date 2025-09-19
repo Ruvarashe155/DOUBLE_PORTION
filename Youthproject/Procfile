@@ -1,1 +1,1 @@
-web: python manage.py migrate && python manage.py createsuperuser --noinput --username admin --email admin@example.com && gunicorn your_project_name.wsgi:application
+web: python manage.py migrate && python manage.py create_superuser && gunicorn Youthproject.wsgi:application
