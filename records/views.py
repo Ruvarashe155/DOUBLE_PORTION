@@ -560,34 +560,34 @@ def cashier(request):
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .ml_utils import predict_stock  # Machine Learning utility
+# from .ml_utils import predict_stock  # Machine Learning utility
 
-@csrf_exempt
-def predict_remaining_view(request):
-    if request.method == 'GET':
-        try:
-            # Extract parameters from GET request
-            user = request.GET.get('user')
-            product = request.GET.get('product')
-            unit_size = float(request.GET.get('unit_size'))
-            allocated = float(request.GET.get('allocated'))
-            sold = float(request.GET.get('sold'))
+# @csrf_exempt
+# def predict_remaining_view(request):
+#     if request.method == 'GET':
+#         try:
+#             # Extract parameters from GET request
+#             user = request.GET.get('user')
+#             product = request.GET.get('product')
+#             unit_size = float(request.GET.get('unit_size'))
+#             allocated = float(request.GET.get('allocated'))
+#             sold = float(request.GET.get('sold'))
 
-            # Validate input
-            if not all([user, product]):
-                return JsonResponse({'error': 'Missing user or product name'}, status=400)
+#             # Validate input
+#             if not all([user, product]):
+#                 return JsonResponse({'error': 'Missing user or product name'}, status=400)
 
-            # Call ML model for prediction
-            prediction = predict_stock(user, product, unit_size, allocated, sold)
+#             # Call ML model for prediction
+#             prediction = predict_stock(user, product, unit_size, allocated, sold)
 
-            return JsonResponse({'predicted_remaining': prediction})
+#             return JsonResponse({'predicted_remaining': prediction})
 
-        except ValueError:
-            return JsonResponse({'error': 'unit_size, allocated, and sold must be numbers'}, status=400)
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
+#         except ValueError:
+#             return JsonResponse({'error': 'unit_size, allocated, and sold must be numbers'}, status=400)
+#         except Exception as e:
+#             return JsonResponse({'error': str(e)}, status=500)
 
-    return JsonResponse({'error': 'Only GET method allowed'}, status=405)
+#     return JsonResponse({'error': 'Only GET method allowed'}, status=405)
 
 
 

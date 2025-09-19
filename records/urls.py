@@ -28,8 +28,8 @@ urlpatterns = [
     path('packing_product', views.packing_product, name='packing_product'),
     path('packed_stock', views.packed_stock, name='packed_stock'),
     path('products_var', views.products_var, name='product_variant'),
-    path('predict/', views.predict_remaining_view, name='predict_remaining'),
-    path('predict-page/', views.stock_prediction_page, name='stock_predict_page'),
+    # path('predict/', views.predict_remaining_view, name='predict_remaining'),
+    # path('predict-page/', views.stock_prediction_page, name='stock_predict_page'),
    
    
 ]
