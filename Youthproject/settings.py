@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
-import dj_database_url
+
 
 
 from pathlib import Path
@@ -95,7 +95,14 @@ WSGI_APPLICATION = 'Youthproject.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dp_kvv1',
+        'USER': 'dp',
+        'PASSWORD': 'OmEC0nxfjV1gGggvF7dxEzi0zz0Xldlz',
+        'HOST': 'dpg-d364d3fdiees738qf010-a',
+        'PORT': '5432',
+    }
 }
 
 
